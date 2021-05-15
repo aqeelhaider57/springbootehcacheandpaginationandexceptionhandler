@@ -1,0 +1,40 @@
+1 - Step first add dependency
+
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+		
+2 - Step two add ehcache.xml file then add two line configuration setting in application.properties file
+		<?xml version="1.0" encoding="UTF-8"?>
+			<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 					   xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+ 					   updateCheck="false">
+
+        <cache 
+    		name="studentCache"
+           maxElementsInMemory="200"
+           eternal="false"
+           timeToLiveSeconds="600"
+           />
+        </ehcache>
+        
+        configuration setting in application.properties file
+ 			#cache
+			spring.cache.type=ehcache
+			spring.cache.ehcache.config=classpath:ehcache.xml
+        
+        
+        
+ 3 - Step three add EhConfig.java configuraton in config package then use two annotations
+ 		@Configuration
+		@EnableCaching
+		
+4 - Step four add @Cacheable("studentCache") or @Cacheable annotation in service layer to make query cacheable
+
+ 
